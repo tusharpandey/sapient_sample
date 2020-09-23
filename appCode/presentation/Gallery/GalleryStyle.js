@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
     authorName: {
         textAlign: 'center',
         fontSize: 18,
-        marginVertical: 20
     },
     imageStyle: {
-        width: 200,
-        height: 300
+        marginVertical: 10,
+        width: 100,
+        height: 100,
+        flex: 1
     },
     container: {
         width: '100%',

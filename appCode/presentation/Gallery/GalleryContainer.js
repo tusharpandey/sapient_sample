@@ -3,7 +3,8 @@ import GalleryComponent from './GalleryComponent';
 import { connect } from 'react-redux';
 import * as actions from './GalleryActions';
 import { SafeAreaView } from 'react-native';
-import GetPhotos from '../../domain/GetPhotosUseCase'
+import GetPicsumPhotos from '../../domain/GetDataUseCase'
+import { goToDetail } from '../../apputility/Navigation';
 
 class GalleryContainer extends React.Component {
 
@@ -16,8 +17,8 @@ class GalleryContainer extends React.Component {
     }
 
     async fetchData() {
-        let photos = new GetPhotos()
-        let images = await photos.getPhotos()
+        let photos = new GetPicsumPhotos()
+        let images = await photos.getData()
         if (images.error == 101) {
             alert("check your internet connection")
             return
@@ -25,18 +26,17 @@ class GalleryContainer extends React.Component {
         this.props.galleryRefresh(images)
     }
 
-    onRefresh = () => {
-        this.props.galleryClear()
-        this.fetchData()
+    onItemClick = (data) => {
+        // console.log("item data : " + JSON.stringify(data))
+        goToDetail(this.props, data)
     }
 
     render() {
         let galleryImages = this.props.gallery.galleryImages
-        console.log("galleryImages : " + JSON.stringify(galleryImages))
         return (<SafeAreaView>
             <GalleryComponent
                 data={galleryImages}
-                onRefresh={this.onRefresh} />
+                onItemClick={this.onItemClick} />
         </SafeAreaView>)
     }
 }

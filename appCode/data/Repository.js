@@ -1,5 +1,5 @@
-import { getPicsumPhotos } from './CloudRepository/module/PicsumPhotos'
+import { getDataFromDB } from './DBRepository/module/GetDataFromDBResouce'
 
-export function getPhotos() {
-    return getPicsumPhotos()
+export function getData() {
+    return getDataFromDB()
 }
